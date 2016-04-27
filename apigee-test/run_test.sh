@@ -1,0 +1,1 @@
+curl http://localhost:28241/test -F "testsuite=@./testsuite/wishlist.json" -F "environment=@./environment/test.json"

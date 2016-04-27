@@ -1,0 +1,7 @@
+{
+    "basePath": "psubrahmanyam-test.apigee.net",
+    "oauthPath": "/oauth2",
+    "productsPath": "/market/v1/products",
+    "wishlistPath": "/market/v1/wishlists",
+    "basicAuth": "QWgzTkhVZndRRDBKbFQyR3I5YlAzTHZlYXRXdGxBSGY6YWFvbG5pZTZBbTZ5cXBEMw=="
+}

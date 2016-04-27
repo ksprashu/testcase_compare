@@ -1,0 +1,230 @@
+{
+    "executionTime": 1458708033477,
+    "info": {
+        "id": null,
+        "name": "Wishlist and Products API"
+    },
+    "organizationName": null,
+    "organizationId": null,
+    "location": "iad",
+    "success": false,
+    "stepResults": [{
+        "info": {
+            "id": null,
+            "name": "Get oauth access token"
+        },
+        "executionTime": 1458708033478,
+        "completionTime": 1458708035204,
+        "request": {
+            "rawUrl": "https://${env.basePath}/${env.oauthPath}/token",
+            "url": "https://psubrahmanyam-test.apigee.net/oauth2/token",
+            "method": "POST",
+            "body": null,
+            "script": null,
+            "headers": {
+                "Authorization": "Basic QWgzTkhVZndRRDBKbFQyR3I5YlAzTHZlYXRXdGxBSGY6YWFvbG5pZTZBbTZ5cXBEMw==",
+                "Accept": "application/json"
+            }
+        },
+        "response": {
+            "statusCode": 200,
+            "responseTime": 1723,
+            "body": {
+                "access_token": "qBNAcD5yk7uDUQdfyHM3moiuObGG",
+                "expires_in": "1799",
+                "scope": "",
+                "refresh_token": "QuJVvA9ICvy9hhTUHdOQ0i3dTeVIWYoq"
+            },
+            "headers": {
+                "date": "Wed, 23 Mar 2016 04:40:32 GMT",
+                "content-type": "application/json",
+                "content-length": "220",
+                "connection": "keep-alive",
+                "server": "Apigee Router"
+            },
+            "extractedVariables": {
+                "accessToken": "qBNAcD5yk7uDUQdfyHM3moiuObGG"
+            },
+            "assertionResult": {
+                "success": true,
+                "statusCodeSuccess": true,
+                "assertVariablesSuccess": true,
+                "assertionVariables": []
+            }
+        }
+    }, {
+        "info": {
+            "id": null,
+            "name": "Create new Wishlist"
+        },
+        "executionTime": 1458708035206,
+        "completionTime": 1458708036650,
+        "request": {
+            "rawUrl": "https://${env.basePath}/${env.wishlistPath}",
+            "url": "https://psubrahmanyam-test.apigee.net/market/v1/wishlists",
+            "method": "POST",
+            "body": null,
+            "script": null,
+            "headers": {
+                "Authorization": "Bearer qBNAcD5yk7uDUQdfyHM3moiuObGG",
+                "Accept": "application/json"
+            }
+        },
+        "response": {
+            "statusCode": 201,
+            "responseTime": 1442,
+            "body": {
+                "name": "wishlistName_8835",
+                "displayName": "my test apigee-test wishlist called wishlistName_8835",
+                "userId": "certification1",
+                "products": []
+            },
+            "headers": {
+                "date": "Wed, 23 Mar 2016 04:40:33 GMT",
+                "content-type": "application/json; charset=utf-8",
+                "content-length": "138",
+                "connection": "keep-alive",
+                "x-powered-by": "Express",
+                "etag": "W/\"8a-Z7oaSz35JManGV+pjIN2cQ\"",
+                "server": "Apigee Router"
+            },
+            "extractedVariables": {
+                "wishlistName": "wishlistName_8835"
+            },
+            "assertionResult": {
+                "success": true,
+                "statusCodeSuccess": true,
+                "assertVariablesSuccess": true,
+                "assertionVariables": []
+            }
+        }
+    }, {
+        "info": {
+            "id": null,
+            "name": "Search for black products"
+        },
+        "executionTime": 1458708036652,
+        "completionTime": 1458708037897,
+        "request": {
+            "rawUrl": "https://${env.basePath}/${env.productsPath}/search",
+            "url": "https://psubrahmanyam-test.apigee.net/market/v1/products/search",
+            "method": "GET",
+            "body": null,
+            "script": null,
+            "headers": {
+                "Authorization": "Bearer qBNAcD5yk7uDUQdfyHM3moiuObGG",
+                "Accept": "application/json"
+            }
+        },
+        "response": {
+            "statusCode": 200,
+            "responseTime": 1241,
+            "body": {
+                "products": [{
+                    "productId": "NL-3600-03",
+                    "name": "Shaping Digital T-Shirt",
+                    "description": "Shaping Digital T-Shirt - Black",
+                    "uuid": "cf22c1da-6f17-11e4-971c-1395e2dc2bfe"
+                }]
+            },
+            "headers": {
+                "date": "Wed, 23 Mar 2016 04:40:34 GMT",
+                "content-type": "application/json",
+                "content-length": "168",
+                "connection": "keep-alive",
+                "access-control-allow-origin": "*",
+                "server": "Apache-Coyote/1.1",
+                "set-cookie": ["rememberMe=deleteMe; Path=/; Max-Age=0; Expires=Tue, 22-Mar-2016 04:10:29 GMT"],
+                "x-apigee-serverprocessingtime": "138"
+            },
+            "extractedVariables": {
+                "productId": "NL-3600-03",
+                "productName": "Shaping Digital T-Shirt",
+                "productDescription": "Shaping Digital T-Shirt - Black",
+                "productUUID": "cf22c1da-6f17-11e4-971c-1395e2dc2bfe"
+            },
+            "assertionResult": {
+                "success": true,
+                "statusCodeSuccess": true,
+                "assertVariablesSuccess": true,
+                "assertionVariables": []
+            }
+        }
+    }, {
+        "info": {
+            "id": null,
+            "name": "Add black product to Wishlist"
+        },
+        "executionTime": 1458708037899,
+        "completionTime": 1458708039761,
+        "request": {
+            "rawUrl": "https://${env.basePath}/${env.wishlistPath}/${wishlistName}/products",
+            "url": "https://psubrahmanyam-test.apigee.net/market/v1/wishlists/wishlistName_8835/products",
+            "method": "POST",
+            "body": null,
+            "script": null,
+            "headers": {
+                "Authorization": "Bearer qBNAcD5yk7uDUQdfyHM3moiuObGG",
+                "Accept": "application/json"
+            }
+        },
+        "response": {
+            "statusCode": 200,
+            "responseTime": 1862,
+            "headers": {
+                "date": "Wed, 23 Mar 2016 04:40:36 GMT",
+                "content-type": "application/json; charset=utf-8",
+                "content-length": "291",
+                "connection": "keep-alive",
+                "x-powered-by": "Express",
+                "etag": "W/\"123-KTEd7Uf93KA0Z3eY+ogwCA\"",
+                "server": "Apigee Router"
+            },
+            "assertionResult": {
+                "success": true,
+                "statusCodeSuccess": true,
+                "assertVariablesSuccess": true,
+                "assertionVariables": []
+            }
+        }
+    }, {
+        "info": {
+            "id": null,
+            "name": "Get wishlist detail"
+        },
+        "failureType": "response_code_assertion_failure",
+        "executionTime": 1458708039762,
+        "completionTime": 1458708040985,
+        "request": {
+            "rawUrl": "https://${env.basePath}/${env.wishlistPath}/${wishlistName}",
+            "url": "https://psubrahmanyam-test.apigee.net/market/v1/wishlists/wishlistName_8835",
+            "method": "GET",
+            "body": null,
+            "script": null,
+            "headers": {
+                "Authorization": "Bearer qBNAcD5yk7uDUQdfyHM3moiuObGG",
+                "Accept": "application/json"
+            }
+        },
+        "response": {
+            "statusCode": 400,
+            "responseTime": 1222,
+            "body": "SyntaxError: Unexpected token n<br> &nbsp; &nbsp;at parse (/organization/environment/api/node_modules/body-parser/lib/types/json.js:83)<br> &nbsp; &nbsp;at /organization/environment/api/node_modules/body-parser/lib/read.js:116<br> &nbsp; &nbsp;at invokeCallback (/organization/environment/api/node_modules/body-parser/node_modules/raw-body/index.js:262)<br> &nbsp; &nbsp;at done (/organization/environment/api/node_modules/body-parser/node_modules/raw-body/index.js:251)<br> &nbsp; &nbsp;at onEnd (/organization/environment/api/node_modules/body-parser/node_modules/raw-body/index.js:308)<br> &nbsp; &nbsp;at emit (events.js:92)<br> &nbsp; &nbsp;at _stream_readable.js:943<br> &nbsp; &nbsp;at _tickDomainCallback (trireme.js:491)<br> &nbsp; &nbsp;at _tickFromSpinner (trireme.js:422)<br>\n",
+            "headers": {
+                "date": "Wed, 23 Mar 2016 04:40:37 GMT",
+                "content-type": "text/html; charset=utf-8",
+                "content-length": "788",
+                "connection": "keep-alive",
+                "x-powered-by": "Express",
+                "x-content-type-options": "nosniff",
+                "server": "Apigee Router"
+            },
+            "assertionResult": {
+                "success": false,
+                "statusCodeSuccess": false,
+                "assertVariablesSuccess": true,
+                "assertionVariables": []
+            }
+        }
+    }]
+}{"executionTime":1458708215756,"info":{"id":null,"name":"Wishlist and Products API"},"organizationName":null,"organizationId":null,"location":"iad","success":false,"stepResults":[{"info":{"id":null,"name":"Get oauth access token"},"executionTime":1458708215757,"completionTime":1458708217174,"request":{"rawUrl":"https://${env.basePath}/${env.oauthPath}/token","url":"https://psubrahmanyam-test.apigee.net/oauth2/token","method":"POST","body":null,"script":null,"headers":{"Authorization":"Basic QWgzTkhVZndRRDBKbFQyR3I5YlAzTHZlYXRXdGxBSGY6YWFvbG5pZTZBbTZ5cXBEMw==","Accept":"application/json"}},"response":{"statusCode":200,"responseTime":1413,"body":{"access_token":"wdjpr4jkQEuJp5QN3RX6VAYxuIjh","expires_in":"1799","scope":"","refresh_token":"iibA2ZxjtkpnoLgeyHzDTMM1dGgNrUsj"},"headers":{"date":"Wed, 23 Mar 2016 04:43:34 GMT","content-type":"application/json","content-length":"220","connection":"keep-alive","server":"Apigee Router"},"extractedVariables":{"accessToken":"wdjpr4jkQEuJp5QN3RX6VAYxuIjh"},"assertionResult":{"success":true,"statusCodeSuccess":true,"assertVariablesSuccess":true,"assertionVariables":[]}}},{"info":{"id":null,"name":"Create new Wishlist"},"executionTime":1458708217176,"completionTime":1458708218455,"request":{"rawUrl":"https://${env.basePath}/${env.wishlistPath}","url":"https://psubrahmanyam-test.apigee.net/market/v1/wishlists","method":"POST","body":null,"script":null,"headers":{"Authorization":"Bearer wdjpr4jkQEuJp5QN3RX6VAYxuIjh","Accept":"application/json"}},"response":{"statusCode":201,"responseTime":1276,"body":{"name":"wishlistName_3223","displayName":"my test apigee-test wishlist called wishlistName_3223","userId":"certification1","products":[]},"headers":{"date":"Wed, 23 Mar 2016 04:43:35 GMT","content-type":"application/json; charset=utf-8","content-length":"138","connection":"keep-alive","x-powered-by":"Express","etag":"W/\"8a-GULcSyOfzpxc4JskLUKvew\"","server":"Apigee Router"},"extractedVariables":{"wishlistName":"wishlistName_3223"},"assertionResult":{"success":true,"statusCodeSuccess":true,"assertVariablesSuccess":true,"assertionVariables":[]}}},{"info":{"id":null,"name":"Search for black products"},"executionTime":1458708218457,"completionTime":1458708219640,"request":{"rawUrl":"https://${env.basePath}/${env.productsPath}/search","url":"https://psubrahmanyam-test.apigee.net/market/v1/products/search","method":"GET","body":null,"script":null,"headers":{"Authorization":"Bearer wdjpr4jkQEuJp5QN3RX6VAYxuIjh","Accept":"application/json"}},"response":{"statusCode":200,"responseTime":1180,"body":{"products":[{"productId":"NL-3600-03","name":"Shaping Digital T-Shirt","description":"Shaping Digital T-Shirt - Black","uuid":"cf22c1da-6f17-11e4-971c-1395e2dc2bfe"}]},"headers":{"date":"Wed, 23 Mar 2016 04:43:36 GMT","content-type":"application/json","content-length":"168","connection":"keep-alive","access-control-allow-origin":"*","server":"Apache-Coyote/1.1","set-cookie":["rememberMe=deleteMe; Path=/; Max-Age=0; Expires=Tue, 22-Mar-2016 04:10:29 GMT"],"x-apigee-serverprocessingtime":"138"},"extractedVariables":{"productId":"NL-3600-03","productName":"Shaping Digital T-Shirt","productDescription":"Shaping Digital T-Shirt - Black","productUUID":"cf22c1da-6f17-11e4-971c-1395e2dc2bfe"},"assertionResult":{"success":true,"statusCodeSuccess":true,"assertVariablesSuccess":true,"assertionVariables":[]}}},{"info":{"id":null,"name":"Add black product to Wishlist"},"executionTime":1458708219641,"completionTime":1458708221156,"request":{"rawUrl":"https://${env.basePath}/${env.wishlistPath}/${wishlistName}/products","url":"https://psubrahmanyam-test.apigee.net/market/v1/wishlists/wishlistName_3223/products","method":"POST","body":null,"script":null,"headers":{"Authorization":"Bearer wdjpr4jkQEuJp5QN3RX6VAYxuIjh","Accept":"application/json"}},"response":{"statusCode":200,"responseTime":1515,"headers":{"date":"Wed, 23 Mar 2016 04:43:38 GMT","content-type":"application/json; charset=utf-8","content-length":"291","connection":"keep-alive","x-powered-by":"Express","etag":"W/\"123-rSvfcctcuYqWqeRxaezHRw\"","server":"Apigee Router"},"assertionResult":{"success":true,"statusCodeSuccess":true,"assertVariablesSuccess":true,"assertionVariables":[]}}},{"info":{"id":null,"name":"Get wishlist detail"},"failureType":"response_code_assertion_failure","executionTime":1458708221156,"completionTime":1458708222287,"request":{"rawUrl":"https://${env.basePath}/${env.wishlistPath}/${wishlistName}","url":"https://psubrahmanyam-test.apigee.net/market/v1/wishlists/wishlistName_3223","method":"GET","body":null,"script":null,"headers":{"Authorization":"Bearer wdjpr4jkQEuJp5QN3RX6VAYxuIjh","Accept":"application/json"}},"response":{"statusCode":400,"responseTime":1128,"body":"SyntaxError: Unexpected token n<br> &nbsp; &nbsp;at parse (/organization/environment/api/node_modules/body-parser/lib/types/json.js:83)<br> &nbsp; &nbsp;at /organization/environment/api/node_modules/body-parser/lib/read.js:116<br> &nbsp; &nbsp;at invokeCallback (/organization/environment/api/node_modules/body-parser/node_modules/raw-body/index.js:262)<br> &nbsp; &nbsp;at done (/organization/environment/api/node_modules/body-parser/node_modules/raw-body/index.js:251)<br> &nbsp; &nbsp;at onEnd (/organization/environment/api/node_modules/body-parser/node_modules/raw-body/index.js:308)<br> &nbsp; &nbsp;at emit (events.js:92)<br> &nbsp; &nbsp;at _stream_readable.js:943<br> &nbsp; &nbsp;at _tickDomainCallback (trireme.js:491)<br> &nbsp; &nbsp;at _tickFromSpinner (trireme.js:422)<br>\n","headers":{"date":"Wed, 23 Mar 2016 04:43:39 GMT","content-type":"text/html; charset=utf-8","content-length":"788","connection":"keep-alive","x-powered-by":"Express","x-content-type-options":"nosniff","server":"Apigee Router"},"assertionResult":{"success":false,"statusCodeSuccess":false,"assertVariablesSuccess":true,"assertionVariables":[]}}}]}

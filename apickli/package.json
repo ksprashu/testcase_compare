@@ -1,0 +1,13 @@
+{
+    "name": "apickli-certify",
+    "version": "1.0.0",
+    "description": "wishlist scenario for apickli",
+    "main": "index.js",
+    "scripts": {
+        "test": "mocha"
+    },
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {},
+    "dependencies": {}
+}

@@ -1,0 +1,190 @@
+{
+    "info": {
+        "name": "Wishlist and Products API",
+        "active": true
+    },
+    "testCase": [{
+        "info": {
+            "name": "Get oauth access token"
+        },
+        "request": {
+            "url": "https://${env.basePath}/${env.oauthPath}/token",
+            "method": "POST",
+            "headers": {
+                "Authorization": "Basic ${env.basicAuth}",
+                "Accept": "application/json"
+            },
+            "form": {
+                "username": "certification1",
+                "password": "password1",
+                "grant_type": "password"
+            },
+            "json": true
+        },
+        "response": {
+            "extractVariables": [{
+                "type": "jsonpath",
+                "name": "accessToken",
+                "value": "$.access_token"
+            }],
+            "assertion": {
+                "statusCode": ["200"]
+            }
+        }
+    }, {
+        "info": {
+            "name": "Create new Wishlist"
+        },
+        "request": {
+            "url": "https://${env.basePath}/${env.wishlistPath}",
+            "method": "POST",
+            "headers": {
+                "Authorization": "Bearer ${accessToken}",
+                "Accept": "application/json"
+            },
+            "json": {
+                "name": "${script.wishlistName}",
+                "displayName": "my test apigee-test wishlist called ${script.wishlistName}"
+            },
+            "script": "var wishlistName = 'wishlistName_' + Math.random().toString(10).substr(2, 4);"
+        },
+        "response": {
+            "extractVariables": [{
+                "type": "jsonpath",
+                "name": "wishlistName",
+                "value": "$.name"
+            }],
+            "assertion": {
+                "statusCode": ["201"]
+            }
+        }
+    }, {
+        "info": {
+            "name": "Search for black products"
+        },
+        "request": {
+            "url": "https://${env.basePath}/${env.productsPath}/search",
+            "method": "GET",
+            "headers": {
+                "Authorization": "Bearer ${accessToken}",
+                "Accept": "application/json"
+            },
+            "json": true,
+            "qs": {
+                "color": "black"
+            }
+        },
+        "response": {
+            "extractVariables": [{
+                "type": "jsonpath",
+                "name": "productId",
+                "value": "$.products[0].productId"
+            }, {
+                "type": "jsonpath",
+                "name": "productName",
+                "value": "$.products[0].name"
+            }, {
+                "type": "jsonpath",
+                "name": "productDescription",
+                "value": "$.products[0].description"
+            }, {
+                "type": "jsonpath",
+                "name": "productUUID",
+                "value": "$.products[0].uuid"
+            }],
+            "assertion": {
+                "statusCode": ["200"]
+            }
+        }
+    }, {
+        "info": {
+            "name": "Add black product to Wishlist"
+        },
+        "request": {
+            "url": "https://${env.basePath}/${env.wishlistPath}/${wishlistName}/products",
+            "method": "POST",
+            "headers": {
+                "Authorization": "Bearer ${accessToken}",
+                "Accept": "application/json"
+            },
+            "json": {
+                "products": {
+                    "productId": "${productId}",
+                    "name": "${productName}",
+                    "dsecription": "${productDescription}",
+                    "uuid": "${productUUID}"
+                }
+            }
+        },
+        "response": {
+            "extractVariables": [],
+            "assertion": {
+                "statusCode": [
+                    "2xx"
+                ],
+                "variables": []
+            }
+        }
+    }, {
+        "info": {
+            "name": "Get wishlist detail"
+        },
+        "request": {
+            "url": "https://${env.basePath}/${env.wishlistPath}/${wishlistName}",
+            "method": "GET",
+            "headers": {
+                "Authorization": "Bearer ${accessToken}",
+                "Accept": "application/json"
+            },
+            "json": true,
+            "body": ""
+        },
+        "response": {
+            "extractVariables": [{
+                "type": "jsonpath",
+                "name": "wishlistProductId",
+                "value": "$.wishlists[0].products[0].productId"
+            }],
+            "assertion": {
+                "statusCode": [
+                    "2xx"
+                ],
+                "variables": []
+            }
+        }
+    }, {
+        "info": {
+            "name": "Check for product availability"
+        },
+        "request": {
+            "url": "https://${env.basePath}/${env.productsPath}/availability",
+            "method": "GET",
+            "headers": {
+                "Authorization": "Bearer ${accessToken}",
+                "Accept": "application/json"
+            },
+            "json": true,
+            "qs": {
+                "productid": "${wishlistProductId}",
+                "storeid": 203
+            }
+        },
+        "response": {
+            "extractVariables": [{
+                "type": "jsonpath",
+                "name": "qty",
+                "value": "$.products[0].qty"
+            }],
+            "assertion": {
+                "statusCode": [
+                    "2xx"
+                ],
+                "variables": [{
+                    "type": "ext_var",
+                    "name": "qty",
+                    "value": "98"
+                }]
+            }
+        }
+    }]
+}

@@ -1,0 +1,18 @@
+{
+    "variables": [{
+        "key": "basePath",
+        "value": "psubrahmanyam-test.apigee.net"
+    }, {
+        "key": "oauthPath",
+        "value": "oauth2"
+    }, {
+        "key": "productsPath",
+        "value": "market/v1/products"
+    }, {
+        "key": "wishlistPath",
+        "value": "market/v1/wishlists"
+    }, {
+        "key": "basicAuth",
+        "value": "QWgzTkhVZndRRDBKbFQyR3I5YlAzTHZlYXRXdGxBSGY6YWFvbG5pZTZBbTZ5cXBEMw=="
+    }]
+}
